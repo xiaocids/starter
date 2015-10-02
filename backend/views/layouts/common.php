@@ -215,9 +215,15 @@ $bundle = BackendAsset::register($this);
                 			'label' => $menu['name'],
                 			'url' => [$menu['route']],
                 			'icon' => $data['icon'],
-                			'badge'=>$data['badge'],                 			             			
+                			'badge'=>$data['badge'],
+                			//'options' => $data['options'],                 			             			
                 			'badgeBgClass'=>$data['badgeBgClass'],
                 			'items' => $menu['children']
+                			
+//                 			'label' => $menu['name'],
+//                 			'url' => [$menu['route']],
+//                 			'options' => $data,
+//                 			'items' => $menu['children']
                 	];
                 };
                 
@@ -230,7 +236,7 @@ $bundle = BackendAsset::register($this);
                     'linkTemplate' => '<a href="{url}">{icon}<span>{label}</span>{right-icon}{badge}</a>',
                     'submenuTemplate'=>"\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n",
                     'activateParents'=>true,
-                	//'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, 1),
+                	//'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, 1, $callback),
                     'items'=> $items
                 		
                 ]) ?>

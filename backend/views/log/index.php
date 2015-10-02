@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\SystemLogSearch */
@@ -17,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+	
+	<?php Pjax::begin() ?>
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -53,5 +55,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ]
     ]); ?>
-
+	<?php Pjax::end() ?>
 </div>
