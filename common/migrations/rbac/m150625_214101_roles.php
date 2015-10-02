@@ -9,26 +9,38 @@ class m150625_214101_roles extends Migration
     {
         $this->auth->removeAll();
 
-        $user = $this->auth->createRole(User::ROLE_USER);
-        $this->auth->add($user);
+        $staff = $this->auth->createRole(User::ROLE_STAFF);
+        $this->auth->add($staff);
+        
+        $supervisor = $this->auth->createRole(User::ROLE_SUPERVISOR);
+        $this->auth->add($supervisor);
+        $this->auth->addChild($supervisor, $staff);
 
         $manager = $this->auth->createRole(User::ROLE_MANAGER);
         $this->auth->add($manager);
-        $this->auth->addChild($manager, $user);
+        $this->auth->addChild($manager, $supervisor);
 
-        $admin = $this->auth->createRole(User::ROLE_ADMINISTRATOR);
-        $this->auth->add($admin);
-        $this->auth->addChild($admin, $manager);
+        $director = $this->auth->createRole(User::ROLE_DIRECTOR);
+        $this->auth->add($director);
+        $this->auth->addChild($director, $manager);
+        
+        $presdir = $this->auth->createRole(User::ROLE_PRESDIR);
+        $this->auth->add($presdir);
+        $this->auth->addChild($presdir, $director);
+        
+        $superpower = $this->auth->createRole(User::ROLE_SUPERPOWER);
+        $this->auth->add($superpower);
+        $this->auth->addChild($superpower, $presdir);
 
-        $this->auth->assign($admin, 1);
-        $this->auth->assign($manager, 2);
-        $this->auth->assign($user, 3);
+        $this->auth->assign($superpower, 1);
+        $this->auth->assign($presdir, 2);
+        $this->auth->assign($director, 3);
     }
 
     public function down()
     {
-        $this->auth->remove($this->auth->getRole(User::ROLE_ADMINISTRATOR));
-        $this->auth->remove($this->auth->getRole(User::ROLE_MANAGER));
-        $this->auth->remove($this->auth->getRole(User::ROLE_USER));
+        $this->auth->remove($this->auth->getRole(User::ROLE_SUPERPOWER));
+        $this->auth->remove($this->auth->getRole(User::ROLE_PRESDIR));
+        $this->auth->remove($this->auth->getRole(User::ROLE_DIRECTOR));
     }
 }

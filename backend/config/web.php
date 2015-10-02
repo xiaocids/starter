@@ -96,7 +96,7 @@ $config = [
             [
                 'controllers'=>['user'],
                 'allow' => true,
-                'roles' => ['administrator'],
+                'roles' => ['superpower'],
             ],
             [
                 'controllers'=>['user'],
@@ -104,7 +104,7 @@ $config = [
             ],
             [
                 'allow' => true,
-                'roles' => ['manager'],
+                'roles' => ['staff'],
             ]
         ]
     ]
